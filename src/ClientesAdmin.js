@@ -71,7 +71,7 @@ class ClientesAdmin extends Component {
                     <td>{cliente.telefono1}</td>
                     <td>{cliente.telefono2}</td>
                     <td>
-                        <Link to={`/clientes/show/${cliente.key}`}>Ver</Link>
+                        <Link to={`/clientes/show/${cliente.key}`}>Ver</Link>/
                         <Link to={`/clientes/edit/${cliente.key}`}>Editar</Link>
                     </td>
                   </tr>
