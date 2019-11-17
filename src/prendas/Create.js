@@ -8,6 +8,7 @@ class Create extends Component {
     super();
     this.ref = firebase.firestore().collection('prendas');
     this.state = {
+      nombre: '',
       propietario: '',
       tipo_prenda: '',
       tipo_tela: '',
@@ -85,10 +86,11 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { propietario, tipo_prenda, tipo_tela, especificaciones_lavado } = this.state;
+    const { nombre, propietario, tipo_prenda, tipo_tela, especificaciones_lavado } = this.state;
     const db = firebase.firestore();
 
     this.ref.add({
+      nombre,
       cedula_propietario: this.cedulaPropietario(propietario),
       propietario: db.collection('clientes').doc(propietario),
       tipo_prenda: db.collection('tipo_prenda').doc(tipo_prenda),
@@ -97,6 +99,7 @@ class Create extends Component {
     }).then((docRef) => {
       this.setState({
         propietario: '',
+        nombre:'',
         tipo_prenda: '',
         tipo_tela: '',
         especificaciones_lavado: ''
@@ -134,23 +137,30 @@ class Create extends Component {
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
                 <label for="propietario">Propietario:</label>
-                <select class="form-control" name="propietario" onChange={this.onChange} placeholder="Propietario" cols="80" rows="3">
+                <select required class="form-control" name="propietario" onChange={this.onChange} placeholder="Propietario" cols="80" rows="3">
+                  <option value="">Seleccione un cliente</option>
                   {this.state.clientes.map(c => {
                     return <option value={c.key}>{c.nombre} ({c.cedula})</option>;
                   })}
                 </select>
               </div>
               <div class="form-group">
+                <label for="nombre">Descripción corta:</label>
+                <input required type="text" class="form-control" name="nombre" onChange={this.onChange} placeholder="Descripción corta" />
+              </div>
+              <div class="form-group">
                 <label for="tipo_prenda">Tipo de prenda:</label>
-                <select class="form-control" name="tipo_prenda" onChange={this.onChange} placeholder="Tipo de prenda" cols="80" rows="3">
+                <select required class="form-control" name="tipo_prenda" onChange={this.onChange} placeholder="Tipo de prenda" cols="80" rows="3">
+                  <option value="">Seleccione un tipo de prenda</option>
                   {this.state.tipos_prenda.map(x => {
                     return <option value={x.key}>{x.nombre}</option>;
                   })}
                 </select>
               </div>
               <div class="form-group">
-                <label for="tipo_tela">Tipo de prenda:</label>
-                <select class="form-control" name="tipo_tela" onChange={this.onChange} placeholder="Tipo de prenda" cols="80" rows="3">
+                <label for="tipo_tela">Tipo de tela:</label>
+                <select required class="form-control" name="tipo_tela" onChange={this.onChange} placeholder="Tipo de prenda" cols="80" rows="3">
+                <option value="">Seleccione un tipo de tela</option>
                   {this.state.tipos_tela.map(x => {
                     return <option value={x.key}>{x.nombre}</option>;
                   })}

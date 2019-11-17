@@ -11,6 +11,7 @@ class Edit extends Component {
     this.state = {
       key: '',
       propietario: '',
+      nombre: '',
       tipo_prenda: '',
       tipo_tela: '',
       especificaciones_lavado: '',
@@ -30,6 +31,7 @@ class Edit extends Component {
         this.setState({
           key: doc.id,
           propietario: prenda.propietario.id,
+          nombre: prenda.nombre,
           tipo_prenda: prenda.tipo_prenda.id,
           tipo_tela: prenda.tipo_tela.id,
           especificaciones_lavado: prenda.especificaciones_lavado
@@ -102,11 +104,12 @@ class Edit extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { propietario, tipo_prenda, tipo_tela, especificaciones_lavado } = this.state;
+    const { nombre, propietario, tipo_prenda, tipo_tela, especificaciones_lavado } = this.state;
     const db = firebase.firestore();
 
     const updateRef = firebase.firestore().collection(collection).doc(this.state.key);
     updateRef.set({
+      nombre,
       cedula_propietario: this.cedulaPropietario(propietario),
       propietario: db.collection('clientes').doc(propietario),
       tipo_prenda: db.collection('tipo_prenda').doc(tipo_prenda),
@@ -115,6 +118,7 @@ class Edit extends Component {
     }).then((docRef) => {
       this.setState({
         key: '',
+        nombre: '',
         propietario: '',
         tipo_prenda: '',
         tipo_tela: '',
@@ -158,6 +162,10 @@ class Edit extends Component {
                     return <option value={c.key}>{c.nombre} ({c.cedula})</option>;
                   })}
                 </select>
+              </div>
+              <div class="form-group">
+                  <label for="nombre">Descripción:</label>
+                  <input type="text" class="form-control" name="nombre" value={this.state.nombre} onChange={this.onChange} placeholder="Descripción corta" />
               </div>
               <div class="form-group">
                 <label htmlFor="tipo_prenda">Tipo de prenda:</label>

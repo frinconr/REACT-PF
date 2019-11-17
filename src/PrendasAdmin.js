@@ -17,11 +17,12 @@ class PrendasAdmin extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const prendas = [];
     querySnapshot.forEach((doc) => {
-      const { cedula_propietario, especificaciones_lavado } = doc.data();
+      const { nombre, cedula_propietario, especificaciones_lavado } = doc.data();
 
         prendas.push({
             key: doc.id,
             doc,
+            nombre,
             cedula_propietario,
             especificaciones_lavado, 
           });
@@ -52,6 +53,7 @@ class PrendasAdmin extends Component {
               <thead>
                 <tr>
                   <th>Key</th>
+                  <th>Descripción</th>
                   <th>Propietario</th>
                   <th>Especificaciones de lavado</th>
                   <th>Acciones</th>
@@ -61,6 +63,7 @@ class PrendasAdmin extends Component {
                 {this.state.prendas.map(prenda =>
                   <tr key={prenda.key}>
                     <td>{prenda.key}</td>
+                    <td>{prenda.nombre}</td>
                     <td>{prenda.cedula_propietario}</td>
                     <td>{prenda.especificaciones_lavado}</td>
                     <td>

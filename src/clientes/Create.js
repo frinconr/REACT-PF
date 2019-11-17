@@ -65,15 +65,15 @@ class Create extends Component {
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
                 <label for="cedula">Cédula:</label>
-                <input type="text" class="form-control" name="cedula" value={cedula} onChange={this.onChange} placeholder="Cedula" />
+                <input required type="text" class="form-control" name="cedula" value={cedula} onChange={this.onChange} placeholder="Cedula" />
               </div>
               <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" name="nombre" value={nombre} onChange={this.onChange} placeholder="Nombre" />
+                <input required type="text" class="form-control" name="nombre" value={nombre} onChange={this.onChange} placeholder="Nombre" />
               </div>
               <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" name="email" value={email} onChange={this.onChange} placeholder="Email" />
+                <input required type="text" class="form-control" name="email" value={email} onChange={this.onChange} placeholder="Email" />
               </div>
               <div class="form-group">
                 <label for="telefono1">Telefono #1:</label>

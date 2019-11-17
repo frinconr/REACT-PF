@@ -150,7 +150,8 @@ class Create extends Component {
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
                 <label for="propietario">Propietario:</label>
-                <select class="form-control" name="propietario" onChange={this.onChange} placeholder="Propietario" cols="80" rows="3">
+                <select required class="form-control" name="propietario" onChange={this.onChange} placeholder="Propietario" cols="80" rows="3">
+                <option value="">Seleccione un cliente</option>
                   {this.state.clientes.map(c => {
                     return <option value={c.key}>{c.nombre} ({c.cedula})</option>;
                   })}
@@ -158,8 +159,8 @@ class Create extends Component {
               </div>
               <div class="form-group">
                 <label for="prenda">Prendas del usuario:</label>
-                <select class="form-control" name="prenda" onChange={this.onChange} placeholder="Prendas del usuario" cols="80" rows="3">
-                  <option>Seleccione una prenda</option>
+                <select required class="form-control" name="prenda" onChange={this.onChange} placeholder="Prendas del usuario" cols="80" rows="3">
+                  <option value="">Seleccione una prenda</option>
                   {this.state.prendas_usuario.map(x => {
                     return <option value={x.key}>{x.nombre}</option>;
                   })}
@@ -167,7 +168,8 @@ class Create extends Component {
               </div>
               <div class="form-group">
                 <label for="estado">Estado del servicio:</label>
-                <select class="form-control" name="estado" onChange={this.onChange} placeholder="Estado del servicio" cols="80" rows="3">
+                <select required class="form-control" name="estado" onChange={this.onChange} placeholder="Estado del servicio" cols="80" rows="3">
+                  <option value="">Seleccione un estado</option>
                   {this.state.estados.map(x => {
                     return <option value={x.key}>{x.nombre}</option>;
                   })}
